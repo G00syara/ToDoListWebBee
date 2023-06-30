@@ -1,0 +1,20 @@
+.TodoList {
+  justify-content: center;
+  margin: 15px;
+  border: 1px solid black;
+}
+.TodoHeader {
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  border: 1px solid black;
+}
+.TodoText {
+  display: grid;
+  justify-content: center;
+  padding: 15px;
+}
+
+li {
+  list-style-type: none;
+}
