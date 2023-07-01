@@ -68,7 +68,7 @@ export const App = () => {
   const cancelTodo = () => {
     setTodos(
       todos.map((todo) => {
-        return { ...todo, completed: todo.completed ? !todo.completed : todo.completed };
+        return { ...todo, completed: todo.completed };
       }),
     );
     setTodoIdForEdit(null);

@@ -19,7 +19,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, deleteTodo, checkTodo,
             textDecoration: todo.completed ? 'line-through' : 'none',
           }}
         >
-          <input type="checkbox" onClick={() => checkTodo(todo.id)} />
+          <input type="checkbox" checked={todo.completed} onClick={() => checkTodo(todo.id)} />
           {todo.title}
         </div>
       </div>

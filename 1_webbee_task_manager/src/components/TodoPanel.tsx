@@ -50,7 +50,14 @@ export const TodoPanel: React.FC<TodoPanelProps> = (props) => {
       <div className="TodoAddInputButton">
         <div>
           <label htmlFor="title">
-            <input autoComplete="off" id="title" value={todo.title} onChange={onChange} title="title" placeholder="" />
+            <input
+              autoComplete="off"
+              id="title"
+              value={todo.title.trimStart()}
+              onChange={onChange}
+              title="title"
+              placeholder=""
+            />
           </label>
           {!isEdit && <MyButton onClick={onClick}>Create new task</MyButton>}
         </div>
