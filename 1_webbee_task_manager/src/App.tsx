@@ -39,7 +39,9 @@ export const App = () => {
   };
 
   const addTodo = ({ title }: Omit<Todo, 'id' | 'completed'>) => {
-    setTodos([...todos, { id: todos[todos.length - 1].id + 1, title, completed: false }]);
+    console.log(todos);
+
+    setTodos([...todos, { id: todos.length == 0 ? 1 : todos[todos.length - 1].id + 1, title, completed: false }]);
   };
 
   const checkTodo = (id: Todo['id']) => {
