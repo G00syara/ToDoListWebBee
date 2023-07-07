@@ -31,7 +31,8 @@ const TodoForm = () => {
     setTodos((delTodo) => delTodo.filter((todo) => todo.id !== id));
   }, []);
 
-  const addTodo = ({ title }: Omit<Todo, 'id' | 'completed'>) => {
+  const addTodo = ({ title }: Pick<Todo, 'title'>) => {
+    //Специально оставил Pick
     setLastId((x) => x + 1);
     console.log(lastid);
 
@@ -49,7 +50,7 @@ const TodoForm = () => {
     );
   }, []);
 
-  const changeTodo = ({ title }: Omit<Todo, 'id' | 'completed'>) => {
+  const changeTodo = ({ title }: Pick<Todo, 'title'>) => {
     if (!title) {
       return alert('Не оставляй поле пустым');
     }

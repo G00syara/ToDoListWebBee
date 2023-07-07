@@ -5,8 +5,8 @@ import { Todo } from '../Types';
 interface EditTodoPanelProps {
   mode: 'edit';
   editTodo: Omit<Todo, 'id' | 'checked'>;
-  changeTodo: ({ title }: Omit<Todo, 'id' | 'checked'>) => void;
-  cancelTodo: ({}: Omit<Todo, 'id' | 'checked'>) => void;
+  changeTodo: ({ title }: Pick<Todo, 'title'>) => void;
+  cancelTodo: ({}: Pick<Todo, 'title'>) => void;
 }
 
 interface DefaultTodoProps {
@@ -21,13 +21,13 @@ const TodoEditPanel: React.FC<EditTodoPanelProps> = (props) => {
 
   const [todo, setTodo] = useState<DefaultTodoProps>(props.editTodo);
 
-  const SaveTodo = () => {
+  const saveTodo = () => {
     if (isEdit) {
       return props.changeTodo(todo);
     }
   };
 
-  const CancelTodo = () => {
+  const cancelTodo = () => {
     if (isEdit) {
       return props.cancelTodo(props.editTodo);
     }
@@ -38,23 +38,33 @@ const TodoEditPanel: React.FC<EditTodoPanelProps> = (props) => {
     setTodo({ ...todo, [title]: value });
   };
 
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+  };
+
   return (
-    <div className="TodoEditInputButton">
-      <label htmlFor="title">
-        <input
-          autoComplete="off"
-          id="title"
-          value={todo.title.trimStart()}
-          onChange={onChange}
-          title="title"
-          placeholder="А текст ;("
-        />
-      </label>
-      <div className="buttons">
-        {isEdit && <MyButton onClick={SaveTodo}>Save</MyButton>}
-        {isEdit && <MyButton onClick={CancelTodo}>Cancel</MyButton>}
+    <form onSubmit={handleSubmit}>
+      <div className="TodoEditInputButton">
+        <label htmlFor="title">
+          <input
+            autoComplete="off"
+            id="title"
+            value={todo.title.trimStart()}
+            onChange={onChange}
+            title="title"
+            placeholder="А текст ;("
+          />
+        </label>
+        <div className="buttons">
+          {isEdit && <MyButton onClick={saveTodo}>Save</MyButton>}
+          {isEdit && (
+            <MyButton type="button" onClick={cancelTodo}>
+              Cancel
+            </MyButton>
+          )}
+        </div>
       </div>
-    </div>
+    </form>
   );
 };
 

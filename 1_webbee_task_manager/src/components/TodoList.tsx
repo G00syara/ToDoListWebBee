@@ -9,8 +9,8 @@ interface TodoListProps {
   deleteTodo: (id: Todo['id']) => void;
   checkTodo: (id: Todo['id']) => void;
   selectTodoIdForEdit: (id: Todo['id']) => void;
-  changeTodo: (title: Omit<Todo, 'id' | 'checked'>) => void;
-  cancelTodo: ({}: Omit<Todo, 'id' | 'checked'>) => void;
+  changeTodo: ({ title }: Pick<Todo, 'title'>) => void; //
+  cancelTodo: ({}: Pick<Todo, 'title'>) => void;
 }
 
 const TodoList: React.FC<TodoListProps> = ({

@@ -8,7 +8,7 @@ interface DefaultTodoProps {
 }
 
 interface AddTodoPanelProps {
-  addTodo: ({ title }: Omit<Todo, 'id' | 'checked'>) => void;
+  addTodo: ({ title }: Pick<Todo, 'title'>) => void;
 }
 
 const DEFAULT_TODO: DefaultTodoProps = { title: '', completed: false };
@@ -16,7 +16,7 @@ const DEFAULT_TODO: DefaultTodoProps = { title: '', completed: false };
 const TodoAddPanel: React.FC<AddTodoPanelProps> = (props) => {
   const [todo, setTodo] = useState<DefaultTodoProps>(DEFAULT_TODO);
 
-  const AddTodo = () => {
+  const addTodo = () => {
     if (!todo.title) {
       return alert('Не оставляй строку пустой)');
     }
@@ -29,20 +29,26 @@ const TodoAddPanel: React.FC<AddTodoPanelProps> = (props) => {
     setTodo({ ...todo, [title]: value });
   };
 
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+  };
+
   return (
     <div className="TodoAddInputButton">
       <div>
-        <label htmlFor="title">
-          <input
-            autoComplete="off"
-            id="title"
-            value={todo.title.trimStart()}
-            onChange={onChange}
-            title="title"
-            placeholder="Вписать новую Todo"
-          />
-        </label>
-        <MyButton onClick={AddTodo}>Create new task</MyButton>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="title">
+            <input
+              autoComplete="off"
+              id="title"
+              value={todo.title.trimStart()}
+              onChange={onChange}
+              title="title"
+              placeholder="Вписать новую Todo"
+            />
+          </label>
+          <MyButton onClick={addTodo}>Create new task</MyButton>
+        </form>
       </div>
     </div>
   );
