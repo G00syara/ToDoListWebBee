@@ -4,7 +4,7 @@ import { Todo } from '../Types';
 
 interface EditTodoPanelProps {
   mode: 'edit';
-  editTodo: Omit<Todo, 'id' | 'checked'>;
+  editTodo: Pick<Todo, 'title' | 'completed'>;
   changeTodo: ({ title }: Pick<Todo, 'title'>) => void;
   cancelTodo: ({}: Pick<Todo, 'title'>) => void;
 }
