@@ -1,6 +1,6 @@
 /// <reference types="react-scripts" />
 
-type Todo = {
+export type Todo = {
   id: number;
   title: string;
   completed: boolean;
