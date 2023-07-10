@@ -13,7 +13,7 @@ const DEFAULT_TODO_LIST: Array<Todo> = [
 const TodoForm = () => {
   const [todoIdForEdit, setTodoIdForEdit] = useState<number | null>(null);
   const [todos, setTodos] = useState(DEFAULT_TODO_LIST);
-  const [lastid, setLastId] = useState<number>(todos[todos.length - 1]?.id + 1);
+  const [lastId, setlastId] = useState<number>(todos[todos.length - 1]?.id + 1);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const filteredTodos = useMemo(() => {
@@ -32,11 +32,8 @@ const TodoForm = () => {
   }, []);
 
   const addTodo = ({ title }: Pick<Todo, 'title'>) => {
-    //Специально оставил Pick
-    setLastId((x) => x + 1);
-    console.log(lastid);
-
-    setTodos((todos) => [...todos, { id: lastid, title, completed: false }]);
+    setTodos((todos) => [...todos, { id: lastId, title, completed: false }]);
+    setlastId((x) => x + 1);
   };
 
   const checkTodo = useCallback((id: Todo['id']) => {
@@ -58,8 +55,6 @@ const TodoForm = () => {
       todos.map((todo) => {
         if (todo.id === todoIdForEdit) {
           return { ...todo, title, completed: todo.completed ? !todo.completed : todo.completed };
-          // completed: todo.completed ? !todo.completed : todo.completed
-          // нужна, чтобы чекбокс постоянно не менял значение, а только если чекбокс нажат
         }
         return todo;
       }),
