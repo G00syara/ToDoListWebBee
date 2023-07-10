@@ -1,0 +1,10 @@
+.button {
+  margin-left: 5px;
+  margin-bottom: 5px;
+  padding: 2px 5px;
+  font-size: 14px;
+  background: transparent;
+  border: 1.5px solid black;
+  cursor: pointer;
+  background-color: lightgray;
+}
